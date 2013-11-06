@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Alanine is an α-amino acid with the chemical formula CH3CH(NH2)COOH. The L-isomer is one of the 20 amino acids encoded by the genetic code. Its codons are GCU, GCC, GCA, and GCG. It is classified as a nonpolar amino acid. L-Alanine is second only to leucine in rate of occurrence, accounting for 7.8% of the primary structure in a sample of 1,150 proteins. D-Alanine occurs in bacterial cell walls and in some peptide antibiotics.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Alanine</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <value>Ala</value>
+  </data>
+  <data name="WikipediaLink" xml:space="preserve">
+    <value>http://en.wikipedia.org/wiki/Alanine</value>
+  </data>
 </root>

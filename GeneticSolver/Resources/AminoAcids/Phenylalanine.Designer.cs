@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GeneticBaseSolver.Properties {
+namespace GeneticSolver.Resources.AminoAcids {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace GeneticBaseSolver.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class Phenylalanine {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Phenylalanine() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace GeneticBaseSolver.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GeneticBaseSolver.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GeneticSolver.Resources.AminoAcids.Phenylalanine", typeof(Phenylalanine).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,42 @@ namespace GeneticBaseSolver.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die L-Phenylalanine (LPA) is an electrically neutral amino acid, one of the twenty common amino acids used to biochemically form proteins, coded for by DNA. The codons for L-phenylalanine are UUU and UUC. Phenylalanine is a precursor for tyrosine, the monoamine signaling molecules dopamine, norepinephrine (noradrenaline), and epinephrine (adrenaline), and the skin pigment melanin. ähnelt.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Phenylalanine ähnelt.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Phe ähnelt.
+        /// </summary>
+        internal static string ShortName {
+            get {
+                return ResourceManager.GetString("ShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die http://en.wikipedia.org/wiki/Phenylalanine ähnelt.
+        /// </summary>
+        internal static string WikipediaLink {
+            get {
+                return ResourceManager.GetString("WikipediaLink", resourceCulture);
             }
         }
     }
