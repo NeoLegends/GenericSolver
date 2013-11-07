@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GeneticSolver.Resources;
 
-namespace GeneticSolver
+namespace GeneticSolver.UI
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
@@ -31,7 +31,29 @@ namespace GeneticSolver
         }
 
         /// <summary>
-        /// Being called when the text of the input textbox changed.
+        /// Handles the event when the button to copy the output to the clipboard was clicked.
+        /// </summary>
+        /// <param name="sender"><see cref="Object"/>.</param>
+        /// <param name="e"><see cref="RoutedEventArgs"/>.</param>
+        private void btnCopyClipboard_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Clipboard.SetText(this.tbOutput.Text);
+        }
+
+        /// <summary>
+        /// Handles the event when the button to show all amino acids was clicked.
+        /// </summary>
+        /// <param name="sender"><see cref="Object"/>.</param>
+        /// <param name="e"><see cref="RoutedEventArgs"/>.</param>
+        private void btnAllAminoAcids_Click(object sender, RoutedEventArgs e)
+        {
+            AminoWindow aminoWindow = new AminoWindow();
+            this.Closed += (s, eventArgs) => aminoWindow.Close();
+            aminoWindow.Show();
+        }
+
+        /// <summary>
+        /// Handles the event when the text of the input textbox changed.
         /// </summary>
         /// <param name="sender"><see cref="Object"/>.</param>
         /// <param name="e"><see cref="TextChangedEventArgs"/>.</param>

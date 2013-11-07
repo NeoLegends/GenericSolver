@@ -61,6 +61,51 @@ namespace GeneticSolver.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Open in Browser ähnelt.
+        /// </summary>
+        internal static string BTNOpenWikipediaArticle {
+            get {
+                return ResourceManager.GetString("BTNOpenWikipediaArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description: ähnelt.
+        /// </summary>
+        internal static string LBAminoAcidDescription {
+            get {
+                return ResourceManager.GetString("LBAminoAcidDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Full Name: ähnelt.
+        /// </summary>
+        internal static string LBAminoAcidFullName {
+            get {
+                return ResourceManager.GetString("LBAminoAcidFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Short Name: ähnelt.
+        /// </summary>
+        internal static string LBAminoAcidShortName {
+            get {
+                return ResourceManager.GetString("LBAminoAcidShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Wikipedia-Link: ähnelt.
+        /// </summary>
+        internal static string LBAminoAcidWikiLink {
+            get {
+                return ResourceManager.GetString("LBAminoAcidWikiLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Enter your mRNA-Sequence here... ähnelt.
         /// </summary>
         internal static string TBInputDefault {
