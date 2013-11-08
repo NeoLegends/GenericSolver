@@ -21,9 +21,24 @@ namespace GeneticSolver.UI
     public partial class AminoWindow : Window
     {
         /// <summary>
+        /// Backing field.
+        /// </summary>
+        private ObservableCollection<ListBoxItem> _AminoAcidSource = new ObservableCollection<ListBoxItem>();
+
+        /// <summary>
         /// Contains all listed amino acids.
         /// </summary>
-        private ObservableCollection<ListBoxItem> aminoAcidSource = new ObservableCollection<ListBoxItem>();
+        public ObservableCollection<ListBoxItem> AminoAcidSource
+        {
+            get 
+            { 
+                return _AminoAcidSource; 
+            }
+            set 
+            { 
+                _AminoAcidSource = value; 
+            }
+        }
 
         /// <summary>
         /// Initializes a new <see cref="AminoWindow"/>.
@@ -31,7 +46,6 @@ namespace GeneticSolver.UI
         public AminoWindow()
         {
             InitializeComponent();
-            ScrollViewer.SetVerticalScrollBarVisibility(this.lbAminoAcidList, ScrollBarVisibility.Disabled);
 
             foreach (AminoAcid aminoAcid in AminoAcid.AllRnaEncoded)
             {
@@ -46,11 +60,10 @@ namespace GeneticSolver.UI
                     lbWikipediaLink.Content = aminoAcid.WikipediaLink;
                 };
 
-                aminoAcidSource.Add(item);
+                this.AminoAcidSource.Add(item);
             }
 
-            this.lbAminoAcidList.ItemsSource = aminoAcidSource;
-            this.aminoAcidSource[0].IsSelected = true;
+            this.AminoAcidSource[0].IsSelected = true;
         }
 
         private void btnOpenWikipediaArticle_Click(object sender, RoutedEventArgs e)

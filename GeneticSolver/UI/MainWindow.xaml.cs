@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -59,43 +60,54 @@ namespace GeneticSolver.UI
         /// <param name="e"><see cref="TextChangedEventArgs"/>.</param>
         private void tbInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            String codonInput = tbInput.Text.Trim().ToUpperInvariant().Replace(Environment.NewLine, String.Empty).Replace(" ", String.Empty).Replace("T", "U");
-            IEnumerable<AminoAcid> aminoAcids = this.GetAminoAcids(this.GetCodons(codonInput));
-            
-            this.tbOutput.Text = String.Join(", ", aminoAcids.Select(aminoAcid => (aminoAcid != null) ? aminoAcid.ShortName : "Error"));
+            char[] codonInput = tbInput.Text.Trim().ToUpperInvariant().ToCharArray().Where(ch => Char.IsLetter(ch)).ToArray();
+            String baseSequence = new String(codonInput);
+
+            IEnumerable<AminoAcid> aminoAcids = this.ContainsStartCodon(baseSequence) ?
+                this.TranslateInput(baseSequence, baseSequence.IndexOf(AminoAcid.Met.Combinations.First())) :
+                this.TranslateInput(baseSequence, 0);
+
+            tbOutput.Text = String.Join(", ", aminoAcids);
         }
 
         /// <summary>
-        /// Splits the text into codons and returns null for an incomplete codon.
+        /// Splits the text into codons.
         /// </summary>
         /// <param name="input">The input to parse.</param>
         /// <returns>A list of codons.</returns>
-        private IEnumerable<String> GetCodons(String input)
+        private IEnumerable<AminoAcid> TranslateInput(String input, int startIndex)
         {
             for (int i = 0; i < input.Length; i += 3)
             {
-                if ((i + 2) < input.Length)
+                if ((i + startIndex + 2) < input.Length)
                 {
-                    yield return input.Substring(i, 3);
+                    String codon = input.Substring(i + startIndex, 3);
+
+                    if (!AminoAcid.Stop.IsValidCombination(codon))
+                    {
+                        yield return AminoAcid.AllRnaEncoded.FirstOrDefault(aminoAcid => aminoAcid.Combinations.Any(aminoCombination => codon == aminoCombination));
+                    }
+                    else
+                    {
+                        yield return AminoAcid.Stop;
+                        yield break;
+                    }
                 }
                 else
                 {
-                    yield return null;
+                    yield break;
                 }
             }
         }
 
         /// <summary>
-        /// Gets the amino acid to the associated codon in the given collection.
+        /// Checks whether the given base sequence contains a start codon.
         /// </summary>
-        /// <param name="codons">A collection of codons.</param>
-        /// <returns>A list of amino acids.</returns>
-        private IEnumerable<AminoAcid> GetAminoAcids(IEnumerable<String> codons)
+        /// <param name="input">The base sequence to check.</param>
+        /// <returns>A boolean indicating whether the input contains a start codon.</returns>
+        private bool ContainsStartCodon(String input)
         {
-            foreach (String codon in codons)
-            {
-                yield return AminoAcid.AllRnaEncoded.FirstOrDefault(aminoAcid => aminoAcid.Combinations.Any(aminoCodon => codon == aminoCodon));
-            }
+            return input.Contains(AminoAcid.Met.Combinations.First());
         }
     }
 }

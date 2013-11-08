@@ -307,6 +307,21 @@ namespace GeneticSolver
         }
 
         /// <summary>
+        /// Checks whether the given base sequence is a valid codon for the amino acid.
+        /// </summary>
+        /// <param name="combination">The base sequence to check.</param>
+        /// <returns>A boolean indicating whether the given codon is a valid sequence of the amino acid.</returns>
+        public bool IsValidCombination(String combination)
+        {
+            if (combination == null)
+                throw new ArgumentNullException("combination");
+            if (combination.Length != 3)
+                throw new ArgumentOutOfRangeException("The combination was not a base triplet.");
+
+            return this.Combinations.Any(codon => codon == combination);
+        }
+
+        /// <summary>
         /// Converts the <see cref="AminoAcid"/> to a <see cref="String"/> returning it's short name.
         /// </summary>
         /// <returns>The <see cref="AminoAcid"/>'s short name.</returns>
