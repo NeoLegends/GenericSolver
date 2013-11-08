@@ -12,8 +12,8 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
-            <Label 
-                Content="Input:" 
+            <Label
+                Content="mRNA 5'->3' Input:" 
                 Foreground="White" 
                 HorizontalAlignment="Left" 
                 Margin="10,9,0,0" 
