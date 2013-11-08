@@ -60,8 +60,7 @@ namespace GeneticSolver.UI
         /// <param name="e"><see cref="TextChangedEventArgs"/>.</param>
         private void tbInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            char[] codonInput = tbInput.Text.Trim().ToUpperInvariant().ToCharArray().Where(ch => Char.IsLetter(ch)).ToArray();
-            String baseSequence = new String(codonInput);
+            String baseSequence = new String(tbInput.Text.Trim().ToUpperInvariant().Replace("T", "U").Where(ch => Char.IsLetter(ch)).ToArray());
 
             IEnumerable<AminoAcid> aminoAcids = this.ContainsStartCodon(baseSequence) ?
                 this.TranslateInput(baseSequence, baseSequence.IndexOf(AminoAcid.Met.Combinations.First())) :
@@ -71,15 +70,16 @@ namespace GeneticSolver.UI
         }
 
         /// <summary>
-        /// Splits the text into codons.
+        /// Splits the text into <see cref="AminoAcid"/>s.
         /// </summary>
         /// <param name="input">The input to parse.</param>
+        /// <param name="startIndex">The index to start parsing at.</param>
         /// <returns>A list of codons.</returns>
         private IEnumerable<AminoAcid> TranslateInput(String input, int startIndex)
         {
-            for (int i = 0; i < input.Length; i += 3)
+            for (int i = 0; i < input.Length; i += 3) // Always walk three steps
             {
-                if ((i + startIndex + 2) < input.Length)
+                if ((i + startIndex + 2) < input.Length) // Check if it's safe to substring
                 {
                     String codon = input.Substring(i + startIndex, 3);
 
