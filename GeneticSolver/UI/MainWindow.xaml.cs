@@ -28,6 +28,8 @@ namespace GeneticSolver.UI
         public MainWindow()
         {
             InitializeComponent();
+            this.Closed += (s, e) => Application.Current.Shutdown();
+
             this.tbInput.Focus();
         }
 
@@ -48,9 +50,7 @@ namespace GeneticSolver.UI
         /// <param name="e"><see cref="RoutedEventArgs"/>.</param>
         private void btnAllAminoAcids_Click(object sender, RoutedEventArgs e)
         {
-            AminoWindow aminoWindow = new AminoWindow();
-            this.Closed += (s, eventArgs) => aminoWindow.Close();
-            aminoWindow.Show();
+            new AminoWindow().Show();
         }
 
         /// <summary>
@@ -62,9 +62,9 @@ namespace GeneticSolver.UI
         {
             String baseSequence = new String(tbInput.Text.Trim().ToUpperInvariant().Replace("T", "U").Where(ch => Char.IsLetter(ch)).ToArray());
 
-            IEnumerable<AminoAcid> aminoAcids = this.ContainsStartCodon(baseSequence) ?
-                this.TranslateInput(baseSequence, baseSequence.IndexOf(AminoAcid.Met.Combinations.First())) :
-                this.TranslateInput(baseSequence, 0);
+            IEnumerable<AminoAcid> aminoAcids = this.ContainsStartCodon(baseSequence) ? // Check if start codon is available
+                this.TranslateInput(baseSequence, baseSequence.IndexOf(AminoAcid.Met.Combinations.First())) : // If yes, start decoding at start codon position
+                this.TranslateInput(baseSequence, 0); // If not, start at the beginning of the input
 
             tbOutput.Text = String.Join(", ", aminoAcids);
         }
@@ -77,19 +77,19 @@ namespace GeneticSolver.UI
         /// <returns>A list of codons.</returns>
         private IEnumerable<AminoAcid> TranslateInput(String input, int startIndex)
         {
-            for (int i = 0; i < input.Length; i += 3) // Always walk three steps
+            for (int i = 0; i < input.Length; i += 3) // Always walk three (=codon-length) steps
             {
                 if ((i + startIndex + 2) < input.Length) // Check if it's safe to substring
                 {
-                    String codon = input.Substring(i + startIndex, 3);
+                    String codon = input.Substring(i + startIndex, 3); // Get the new codon
 
-                    if (!AminoAcid.Stop.IsValidCombination(codon))
+                    if (!AminoAcid.Stop.IsValidCombination(codon)) // If input is no stop codon, return it
                     {
                         yield return AminoAcid.AllRnaEncoded.FirstOrDefault(aminoAcid => aminoAcid.Combinations.Any(aminoCombination => codon == aminoCombination));
                     }
                     else
                     {
-                        yield return AminoAcid.Stop;
+                        yield return AminoAcid.Stop; // If input is stop codon, return it and break
                         yield break;
                     }
                 }
