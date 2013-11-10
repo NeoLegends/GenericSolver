@@ -128,7 +128,7 @@ namespace GeneticSolver
         /// Leucine.
         /// </summary>
         public static readonly AminoAcid Leu = new AminoAcid(
-            new[] { "UUA", "UUG", "CUU", "CUC", "CUC", "CUG" },
+            new[] { "UUA", "UUG", "CUU", "CUC", "CUG", "CUA" },
             Leucine.ShortName,
             Leucine.Name,
             Leucine.Description,
