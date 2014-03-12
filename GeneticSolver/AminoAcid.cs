@@ -286,6 +286,11 @@ namespace GeneticSolver
         /// <summary>
         /// Initializes a new <see cref="AminoAcid"/>.
         /// </summary>
+        private AminoAcid() { }
+
+        /// <summary>
+        /// Initializes a new <see cref="AminoAcid"/>.
+        /// </summary>
         /// <param name="combinations">The amino acid's mRNA-combinations.</param>
         /// <param name="shortName">The <see cref="AminoAcid"/>'s short name. e.g. Phe</param>
         /// <param name="fullName">The <see cref="AminoAcid"/>'s full name. e.g. Phenylalanin</param>
