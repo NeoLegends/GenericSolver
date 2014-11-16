@@ -61,13 +61,13 @@ namespace GeneticSolver.UI
         /// <param name="e"><see cref="TextChangedEventArgs"/>.</param>
         private void tbInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            String baseSequence = new String(tbInput.Text.Trim().ToUpperInvariant().Replace("T", "U").Where(ch => Char.IsLetter(ch)).ToArray());
+            string baseSequence = new string(tbInput.Text.Trim().ToUpperInvariant().Replace("T", "U").Where(ch => Char.IsLetter(ch)).ToArray());
 
             IEnumerable<AminoAcid> aminoAcids = this.ContainsStartCodon(baseSequence) ? // Check if start codon is available
                 this.TranslateInput(baseSequence, baseSequence.IndexOf(AminoAcid.Met.Combinations.First())) : // If yes, start decoding at start codon position
                 this.TranslateInput(baseSequence, 0); // If not, start at the beginning of the input
 
-            tbOutput.Text = String.Join(", ", aminoAcids);
+            tbOutput.Text = string.Join(", ", aminoAcids);
         }
 
         /// <summary>
@@ -76,13 +76,13 @@ namespace GeneticSolver.UI
         /// <param name="input">The input to parse.</param>
         /// <param name="startIndex">The index to start parsing at.</param>
         /// <returns>A list of codons.</returns>
-        private IEnumerable<AminoAcid> TranslateInput(String input, int startIndex)
+        private IEnumerable<AminoAcid> TranslateInput(string input, int startIndex)
         {
             for (int i = 0; i < input.Length; i += 3) // Always walk three (=codon-length) steps
             {
                 if ((i + startIndex + 2) < input.Length) // Check if it's safe to substring
                 {
-                    String codon = input.Substring(i + startIndex, 3); // Get the new codon
+                    string codon = input.Substring(i + startIndex, 3); // Get the new codon
 
                     if (!AminoAcid.Stop.IsValidCombination(codon)) // If input is no stop codon, return it
                     {
@@ -106,9 +106,9 @@ namespace GeneticSolver.UI
         /// </summary>
         /// <param name="input">The base sequence to check.</param>
         /// <returns>A boolean indicating whether the input contains a start codon.</returns>
-        private bool ContainsStartCodon(String input)
+        private bool ContainsStartCodon(string input)
         {
-            return input.Contains(AminoAcid.Met.Combinations.First());
+            return AminoAcid.Met.Combinations.Any(codon => input.Contains(codon));
         }
     }
 }

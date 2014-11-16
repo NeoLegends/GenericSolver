@@ -257,31 +257,31 @@ namespace GeneticSolver
         /// The <see cref="AminoAcid"/>'s mRNA-combinations.
         /// </summary>
         [DataMember]
-        public String[] Combinations { get; private set; }
+        public string[] Combinations { get; private set; }
 
         /// <summary>
         /// The <see cref="AminoAcid"/>'s short name. e.g. Phe
         /// </summary>
         [DataMember]
-        public String ShortName { get; private set; }
+        public string ShortName { get; private set; }
 
         /// <summary>
         /// The <see cref="AminoAcid"/>'s full name. e.g. Phenylalanin
         /// </summary>
         [DataMember]
-        public String FullName { get; private set; }
+        public string FullName { get; private set; }
 
         /// <summary>
         /// The <see cref="AminoAcid"/>'s description.
         /// </summary>
         [DataMember]
-        public String Description { get; private set; }
+        public string Description { get; private set; }
 
         /// <summary>
         /// The <see cref="AminoAcid"/>'s wikipedia entry.
         /// </summary>
         [DataMember]
-        public String WikipediaLink { get; private set; }
+        public string WikipediaLink { get; private set; }
 
         /// <summary>
         /// Initializes a new <see cref="AminoAcid"/>.
@@ -296,12 +296,12 @@ namespace GeneticSolver
         /// <param name="fullName">The <see cref="AminoAcid"/>'s full name. e.g. Phenylalanin</param>
         /// <param name="description">The <see cref="AminoAcid"/>'s description.</param>
         /// <param name="wikipediaLink">The <see cref="AminoAcid"/>'s wikipedia entry.</param>
-        private AminoAcid(
-                String[] combinations,
-                String shortName,
-                String fullName,
-                String description,
-                String wikipediaLink
+        public AminoAcid(
+                string[] combinations,
+                string shortName,
+                string fullName,
+                string description,
+                string wikipediaLink
             )
         {
             this.Combinations = combinations;
@@ -316,14 +316,15 @@ namespace GeneticSolver
         /// </summary>
         /// <param name="combination">The base sequence to check.</param>
         /// <returns>A boolean indicating whether the given codon is a valid sequence of the amino acid.</returns>
-        public bool IsValidCombination(String combination)
+        public bool IsValidCombination(string combination)
         {
             if (combination == null)
                 throw new ArgumentNullException("combination");
             if (combination.Length != 3)
                 throw new ArgumentOutOfRangeException("The combination was not a base triplet.");
 
-            return this.Combinations.Any(codon => codon == combination);
+            combination = combination.ToUpperInvariant();
+            return this.Combinations.Select(codon => codon.ToUpperInvariant()).Any(codon => codon == combination);
         }
 
         /// <summary>

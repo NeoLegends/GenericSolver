@@ -68,7 +68,7 @@ namespace GeneticSolver.UI
 
         private void btnOpenWikipediaArticle_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start((String)lbWikipediaLink.Content); // FIX: Hacky.
+            Process.Start((string)lbWikipediaLink.Content); // FIX: Hacky.
         }
     }
 }
